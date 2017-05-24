@@ -44,7 +44,7 @@ class IpTraceableSubscriber
     {
         $events->listen(
             'Illuminate\Auth\Events\Login',
-            'Xetaravel\Listeners\Subscribers\IpTraceableSubscriber@onLogin'
+            'Xetaio\IpTraceable\Listeners\Subscribers\IpTraceableSubscriber@onLogin'
         );
     }
 
