@@ -13,7 +13,7 @@ class IpTraceableServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        \Xetaravel\Listeners\Subscribers\IpTraceableSubscriber::class,
+        \Xetaio\IpTraceable\Listeners\Subscribers\IpTraceableSubscriber::class,
     ];
 
     /**
