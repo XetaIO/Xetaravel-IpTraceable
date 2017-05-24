@@ -1,0 +1,46 @@
+{
+    "name": "xetaio/xetaravel-iptraceable",
+    "description": "A simple package that update an IP field when the user login into the application.",
+    "keywords": [
+        "laravel",
+        "laravel-5-package",
+        "ip",
+        "traceable",
+        "users",
+        "login"
+    ],
+    "homepage": "https://github.com/XetaIO/Xetaravel-IpTraceable",
+    "support": {
+        "source": "https://github.com/XetaIO/Xetaravel-IpTraceable",
+        "issues": "https://github.com/XetaIO/Xetaravel-IpTraceable/issues"
+    },
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Xety",
+            "email": "emeric@xeta.io",
+            "homepage": "https://github.com/Xety"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "laravel/framework": "5.4.*",
+        "nesbot/carbon": "~1.20"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Xetaio\\IpTraceable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
