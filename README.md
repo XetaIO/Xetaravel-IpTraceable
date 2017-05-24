@@ -33,7 +33,7 @@
 >        //...
 >    ],
 >    //...
-];
+> ];
 > ```
 > **Note** : It's **very important** to import the middleware **after** the `Illuminate\Session\Middleware\StartSession` middleware, since this package use the session.
 >
