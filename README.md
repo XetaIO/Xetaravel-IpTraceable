@@ -6,6 +6,9 @@
 >
 > A simple package that update an IP field when the user login into the application. Also work with the `remember_me` token.
 >
+> ## Requirement
+> ![PHP](https://img.shields.io/badge/PHP->=7.0-brightgreen.svg?style=flat-square)
+>
 > ## Installation
 >
 > ```
