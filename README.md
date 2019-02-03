@@ -2,7 +2,7 @@
 >
 > |Stable Version|Downloads|Laravel|License|
 > |:-------:|:------:|:-------:|:-------:|
-> |[![Latest Stable Version](https://img.shields.io/packagist/v/XetaIO/Xetaravel-IpTraceable.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel-iptraceable)|[![Total Downloads](https://img.shields.io/packagist/dt/xetaio/xetaravel-iptraceable.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel-iptraceable)|[![Laravel 5.6](https://img.shields.io/badge/Laravel-5.6-f4645f.svg?style=flat-square)](http://laravel.com)|[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/XetaIO/Xetaravel-IpTraceable/blob/master/LICENSE)|
+> |[![Latest Stable Version](https://img.shields.io/packagist/v/XetaIO/Xetaravel-IpTraceable.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel-iptraceable)|[![Total Downloads](https://img.shields.io/packagist/dt/xetaio/xetaravel-iptraceable.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel-iptraceable)|[![Laravel 5.6](https://img.shields.io/badge/Laravel->=5.6-f4645f.svg?style=flat-square)](http://laravel.com)|[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/XetaIO/Xetaravel-IpTraceable/blob/master/LICENSE)|
 >
 > A simple package that update an IP field when the user login into the application. Also work with the `remember_me` token.
 >
