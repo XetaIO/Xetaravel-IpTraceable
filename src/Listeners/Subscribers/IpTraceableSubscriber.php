@@ -1,7 +1,6 @@
 <?php
 namespace Xetaio\IpTraceable\Listeners\Subscribers;
 
-use Carbon\Carbon;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
