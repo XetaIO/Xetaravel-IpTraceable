@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaio\IpTraceable\Http\Middleware;
 
 use Closure;
@@ -11,18 +14,12 @@ class IpTraceable
     use IpTraceableTrait;
 
     /**
-     * @var \Illuminate\Contracts\Auth\Guard
-     */
-    protected $auth;
-
-    /**
      * Create a new filter instance.
      *
      * @param \Illuminate\Contracts\Auth\Guard $auth
      */
-    public function __construct(Guard $auth)
+    public function __construct(protected Guard $auth)
     {
-        $this->auth = $auth;
     }
 
     /**
@@ -31,14 +28,14 @@ class IpTraceable
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
      *
-     * @return Closure
+     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         if ($this->auth->check() && $this->auth->viaRemember()) {
             $ip = $request->getClientIp();
 
-            $this->updateFields($this->auth, $ip);
+            $this->updateFields($this->auth->user(), $ip);
         }
 
         return $next($request);

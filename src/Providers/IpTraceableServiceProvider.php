@@ -3,32 +3,31 @@ namespace Xetaio\IpTraceable\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Xetaio\IpTraceable\Listeners\Subscribers\IpTraceableSubscriber;
 
 class IpTraceableServiceProvider extends ServiceProvider
 {
-
-    /**
-     * The subscriber classes to register.
-     *
-     * @var array
-     */
-    protected $subscribe = [
-        \Xetaio\IpTraceable\Listeners\Subscribers\IpTraceableSubscriber::class,
-    ];
-
     /**
      * Register the application's event listeners and publish the config file.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        foreach ($this->subscribe as $subscriber) {
-            Event::subscribe($subscriber);
-        }
+        Event::subscribe(IpTraceableSubscriber::class);
 
         $this->publishes([
             __DIR__ . '/../../config/iptraceable.php' => config_path('iptraceable.php'),
         ], 'config');
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../../config/iptraceable.php', 'iptraceable');
     }
 }

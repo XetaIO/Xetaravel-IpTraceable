@@ -1,8 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaio\IpTraceable\Listeners\Subscribers;
 
 use Illuminate\Auth\Events\Login;
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
 use Xetaio\IpTraceable\Traits\IpTraceable as IpTraceableTrait;
 
@@ -11,40 +14,24 @@ class IpTraceableSubscriber
     use IpTraceableTrait;
 
     /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
-    /**
-     * @var \Illuminate\Contracts\Auth\Guard
-     */
-    protected $auth;
-
-    /**
      * Create the event listener.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Contracts\Auth\Guard $auth
      */
-    public function __construct(Request $request, Guard $auth)
+    public function __construct(protected Request $request)
     {
-        $this->request = $request;
-        $this->auth = $auth;
     }
 
     /**
      * Register the listeners for the subscriber.
      *
-     * @param Illuminate\Events\Dispatcher $events
+     * @param \Illuminate\Events\Dispatcher $events The event dispatcher to register the listeners with.
      *
      * @return void
      */
-    public function subscribe($events)
+    public function subscribe(Dispatcher $events): void
     {
-        $events->listen(
-            'Illuminate\Auth\Events\Login',
-            'Xetaio\IpTraceable\Listeners\Subscribers\IpTraceableSubscriber@onLogin'
-        );
+        $events->listen(Login::class, [self::class, 'onLogin']);
     }
 
     /**
@@ -52,12 +39,10 @@ class IpTraceableSubscriber
      *
      * @param \Illuminate\Auth\Events\Login $event The event that was fired.
      *
-     * @return bool
+     * @return void
      */
-    public function onLogin(Login $event)
+    public function onLogin(Login $event): void
     {
-        $ip = $this->request->getClientIp();
-
-        $this->updateFields($this->auth, $ip);
+        $this->updateFields($event->user, $this->request->getClientIp());
     }
 }
