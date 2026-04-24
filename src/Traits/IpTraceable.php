@@ -1,51 +1,50 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaio\IpTraceable\Traits;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Guard;
-use InvalidArgumentException;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 trait IpTraceable
 {
     /**
      * Update the fields for the user.
      *
-     * @param \Illuminate\Contracts\Auth\Guard $auth
+     * @param \Illuminate\Contracts\Auth\Authenticatable $user The user to update the fields for.
      * @param null|string $ip The IP to set.
      *
      * @return bool
      */
-    public function updateFields(Guard $auth, $ip = null): bool
+    public function updateFields(Authenticatable $user, ?string $ip = null): bool
     {
         $ip = $this->setIpValue($ip);
-
-        $user = $auth->user();
 
         if (!$user instanceof Model) {
             return false;
         }
-        $user->last_login_ip = $ip;
+        $user->{config('iptraceable.fields.last_login_ip')} = $ip;
 
         $lastLoginDate = config('iptraceable.fields.last_login_date');
 
         if (!is_null($lastLoginDate)) {
-            $user->{$lastLoginDate} = Carbon::now();
+            $user->{$lastLoginDate} = now();
         }
 
         return $user->save();
     }
 
     /**
-     * Validate the IP and return it if it's a valide IP.
+     * Validate the IP and return it if it's a valid IP.
      *
-     * @param null|int $ip The IP to validate.
+     * @param string|null $ip The IP to validate.
      *
      * @return string|null
      */
-    protected function setIpValue($ip = null)
+    protected function setIpValue(?string $ip = null): ?string
     {
-        if (!filter_var($ip, FILTER_VALIDATE_IP) === false) {
+        if (filter_var($ip, FILTER_VALIDATE_IP) !== false) {
             return $ip;
         }
 
